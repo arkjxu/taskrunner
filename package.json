@@ -1,0 +1,25 @@
+{
+  "name": "taskrunner",
+  "version": "1.0.30",
+  "main": "./dist/main.js",
+  "license": "MIT",
+  "scripts": {
+    "build": "tsc",
+    "start": "node ./dist/main.js",
+    "test": "node ./test/index.js",
+    "dev": "npm run build && npm run start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://bitbucket.nike.com/scm/~kxu16/taskrunner.git",
+    "directory": "dist"
+  },
+  "devDependencies": {
+    "tslib": "^2.0.1",
+    "typescript": "^4.0.3"
+  },
+  "dependencies": {
+    "@types/bull": "^3.14.2",
+    "bull": "^3.18.0"
+  }
+}
