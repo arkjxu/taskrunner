@@ -3,8 +3,13 @@ Object.defineProperty(exports, "__esModule", { value: true });
 function runTask(job) {
     return new Promise(async (resolve, reject) => {
         const taskList = job.data;
-        const componentModule = require(taskList.tasks[0].path);
+        let componentModule = null;
+        if (!require.cache[taskList.tasks[0].path]) {
+            componentModule = require(taskList.tasks[0].path);
+        }
         try {
+            if (!componentModule)
+                throw new Error(`Unable to get component: ${taskList.tasks[0].path}`);
             let componentClass = taskList.tasks[0].module ? componentModule[taskList.tasks[0].module] : componentModule.getName ? componentModule : componentModule.default;
             let output = "";
             const component = new componentClass();
