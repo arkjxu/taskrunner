@@ -1,11 +1,13 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+const path_1 = require("path");
 function runTask(job) {
     return new Promise(async (resolve, reject) => {
         const taskList = job.data;
         let componentModule = null;
-        if (!require.cache[taskList.tasks[0].path]) {
-            componentModule = require(taskList.tasks[0].path.includes('.js') ? taskList.tasks[0].path : taskList.tasks[0].path + '.js');
+        const relativePath = path_1.relative(__dirname, taskList.tasks[0].path);
+        if (!require.cache[relativePath]) {
+            componentModule = require(relativePath);
         }
         try {
             if (!componentModule)

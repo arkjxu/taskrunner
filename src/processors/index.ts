@@ -1,12 +1,14 @@
 import { Job } from "bull";
 import { INextTask, Step } from "../common/types";
+import { relative } from "path";
 
 function runTask(job: Job): Promise<Readonly<INextTask>> {
   return new Promise(async (resolve: (v: Readonly<INextTask>) => void, reject: (e: Error) => void) => {
     const taskList: INextTask = job.data;
     let componentModule: any = null;
-    if (!require.cache[taskList.tasks[0].path]) {
-      componentModule = require(taskList.tasks[0].path.includes('.js') ? taskList.tasks[0].path : taskList.tasks[0].path + '.js');
+    const relativePath = relative(__dirname, taskList.tasks[0].path);
+    if (!require.cache[relativePath]) {
+      componentModule = require(relativePath);
     }
     try {
       if (!componentModule) throw new Error(`Unable to get component: ${taskList.tasks[0].path}`);
