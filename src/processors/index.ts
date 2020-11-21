@@ -6,7 +6,7 @@ function runTask(job: Job): Promise<Readonly<INextTask>> {
     const taskList: INextTask = job.data;
     let componentModule: any = null;
     if (!require.cache[taskList.tasks[0].path]) {
-      componentModule = require(taskList.tasks[0].path);
+      componentModule = require(taskList.tasks[0].path.includes('.js') ? taskList.tasks[0].path : taskList.tasks[0].path + '.js');
     }
     try {
       if (!componentModule) throw new Error(`Unable to get component: ${taskList.tasks[0].path}`);
