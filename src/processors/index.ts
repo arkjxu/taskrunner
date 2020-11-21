@@ -10,7 +10,7 @@ function runTask(job: Job): Promise<Readonly<INextTask>> {
     }
     try {
       if (!componentModule) throw new Error(`Unable to get component: ${taskList.tasks[0].path}`);
-      let componentClass: any = taskList.tasks[0].module ? componentModule[taskList.tasks[0].module] : componentModule.getName ? componentModule : componentModule.default;
+      let componentClass: any = taskList.tasks[0].module ? componentModule[taskList.tasks[0].module] : componentModule.default ? componentModule.default: componentModule;
       let output: Readonly<unknown> = "";
       const component: Step = new componentClass();
       output = await component.run({

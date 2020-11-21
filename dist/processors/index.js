@@ -10,7 +10,7 @@ function runTask(job) {
         try {
             if (!componentModule)
                 throw new Error(`Unable to get component: ${taskList.tasks[0].path}`);
-            let componentClass = taskList.tasks[0].module ? componentModule[taskList.tasks[0].module] : componentModule.getName ? componentModule : componentModule.default;
+            let componentClass = taskList.tasks[0].module ? componentModule[taskList.tasks[0].module] : componentModule.default ? componentModule.default : componentModule;
             let output = "";
             const component = new componentClass();
             output = await component.run({

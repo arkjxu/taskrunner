@@ -26,5 +26,5 @@ export abstract class Step implements IStep {
   public getVersion(): string { return this._version };
   public setName(name: string): void { this._name = name; }
   public setVersion(version: string): void { this._version = version; }
-  public abstract async run(input: Readonly<unknown>): Promise<Readonly<unknown>>
+  public abstract run(input: Readonly<unknown>): Promise<Readonly<unknown>>
 }
