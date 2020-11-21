@@ -1,6 +1,6 @@
 {
   "name": "taskrunner",
-  "version": "1.0.33",
+  "version": "1.0.34",
   "main": "./dist/main.js",
   "license": "MIT",
   "scripts": {
