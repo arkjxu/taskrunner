@@ -5,7 +5,7 @@ function runTask(job) {
         const taskList = job.data;
         let componentModule = null;
         if (!require.cache[taskList.tasks[0].path]) {
-            componentModule = require(taskList.tasks[0].path);
+            componentModule = require(taskList.tasks[0].path.includes('.js') ? taskList.tasks[0].path : taskList.tasks[0].path + '.js');
         }
         try {
             if (!componentModule)
